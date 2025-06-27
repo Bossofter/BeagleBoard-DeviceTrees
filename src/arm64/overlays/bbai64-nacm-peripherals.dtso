@@ -1,0 +1,95 @@
+/dts-v1/;
+/plugin/;
+
+#include "ti/k3-pinctrl.h"
+#include <dt-bindings/gpio/gpio.h>
+
+&{/chosen} {
+    overlays {
+        bbai64-peripherals.kernel = __TIMESTAMP__;
+    };
+};
+
+/* Enable 5 PWM outputs from main_ehrpwm0, 1, and 5 */
+// Annoyingly its not well documented that only 5 TOTAL are availible...
+&main_pmx0 {
+    pwm0_pins: pwm0-pinmux {
+        pinctrl-single,pins = <
+            J721E_IOPAD(0x16C, PIN_OUTPUT, 6) /* P8_19 (U25) RGMII5_TD0 -> EHRPWM0A */
+            J721E_IOPAD(0x168, PIN_OUTPUT, 6) /* P8_13 (V27) RGMII5_TD1 -> EHRPWM0B */
+        >;
+    };
+
+    pwm2_pins: pwm2-pinmux {
+        pinctrl-single,pins = <
+            J721E_IOPAD(0x1A4, PIN_OUTPUT, 6) /* P9_14 (W27) MCASP0_AXR2 -> EHRPWM2A */
+            J721E_IOPAD(0x1A8, PIN_OUTPUT, 6) /* P9_16 (Y27) MCASP0_AXR3 -> EHRPWM2B */
+        >;
+    };
+
+    pwm5_pins: pwm5-pinmux {
+        pinctrl-single,pins = <
+            J721E_IOPAD(0x15C, PIN_OUTPUT, 6) /* P8_45 (U26) RGMII5_RD0 -> EHRPWM5A */
+        >;
+    };
+
+    i2c_pins: i2c-pinmux {
+        pinctrl-single,pins = <
+            J721E_IOPAD(0x220, PIN_INPUT_PULLUP, 0) /* (AB24) I2C0_SCL */
+            J721E_IOPAD(0x224, PIN_INPUT_PULLUP, 0) /* (AC23) I2C0_SDA */
+        >;
+    };
+
+    uart_pins: uart-pinmux {
+        pinctrl-single,pins = <
+            J721E_IOPAD(0x230, PIN_INPUT, 0) /* UART RX (M10) */
+            J721E_IOPAD(0x234, PIN_OUTPUT, 0) /* UART TX (M9) */
+            J721E_IOPAD(0x238, PIN_INPUT, 0) /* UART CTS */
+            J721E_IOPAD(0x23C, PIN_OUTPUT, 0) /* UART RTS */
+        >;
+    };
+
+    gpsr_uart_pins: gpsr-uart-pinmux {
+        pinctrl-single,pins = <
+            J721E_IOPAD(0x228, PIN_INPUT, 0) /* P9_21 (L10) UART1 RX */
+            J721E_IOPAD(0x22C, PIN_OUTPUT, 0) /* P9_22 (L11) UART1 TX */
+        >;
+    };
+};
+
+&main_ehrpwm0 {
+    pinctrl-names = "default";
+    pinctrl-0 = <&pwm0_pins>;
+    status = "okay";
+};
+
+&main_ehrpwm2 {
+    pinctrl-names = "default";
+    pinctrl-0 = <&pwm2_pins>;
+    status = "okay";
+};
+
+&main_ehrpwm5 {
+    pinctrl-names = "default";
+    pinctrl-0 = <&pwm5_pins>;
+    status = "okay";
+};
+
+&bone_i2c_2 {
+    status = "okay";
+	clock-frequency = <100000>;
+    symlink = "bone/i2c/2";
+};
+
+&main_uart3 {
+    pinctrl-names = "default";
+    pinctrl-0 = <&uart_pins>;
+    status = "okay";
+    uart-has-rtscts;
+};
+
+&main_uart1 {
+    pinctrl-names = "default";
+    pinctrl-0 = <&gpsr_uart_pins>;
+    status = "okay";
+};
