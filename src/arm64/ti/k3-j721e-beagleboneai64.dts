@@ -22,7 +22,9 @@
 
 	aliases {
 		serial0 = &wkup_uart0;
+		serial1 = &main_uart1;
 		serial2 = &main_uart0;
+		serial4 = &main_uart4;
 		mmc0 = &main_sdhci0;
 		mmc1 = &main_sdhci1;
 		i2c0 = &wkup_i2c0;

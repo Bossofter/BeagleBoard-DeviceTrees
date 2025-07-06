@@ -32,17 +32,17 @@
 
     gpsr_uart_pins: gpsr-uart-pinmux {
         pinctrl-single,pins = <
-            J721E_IOPAD(0x00C, PIN_INPUT, 0)  /* P8_17 -> UART-1 RXD */
-            J721E_IOPAD(0x010, PIN_OUTPUT, 0) /* P8_18 -> UART-1 TXD */
+            J721E_IOPAD(0x00C, PIN_INPUT, 14)  /* P8_17 -> UART-1 RXD */
+            J721E_IOPAD(0x010, PIN_OUTPUT, 14) /* P8_18 -> UART-1 TXD */
         >;
     };
 
     radio_uart_pins: radio-uart-pinmux {
         pinctrl-single,pins = <
-            J721E_IOPAD(0x0E8, PIN_INPUT, 0)  /* P9_37 -> UART-4 RX  */
-            J721E_IOPAD(0x0EC, PIN_OUTPUT, 0) /* P9_38 -> UART-4 TX  */
-            J721E_IOPAD(0x084, PIN_INPUT, 0)  /* P8_31 -> UART-4 CTS */
-            J721E_IOPAD(0x104, PIN_OUTPUT, 0) /* P8_32 -> UART-4 RTS */
+            J721E_IOPAD(0x0E8, PIN_INPUT, 8)  /* P9_37 -> UART-4 RX  */
+            J721E_IOPAD(0x0EC, PIN_OUTPUT, 8) /* P9_38 -> UART-4 TX  */
+            J721E_IOPAD(0x084, PIN_INPUT, 8)  /* P8_31 -> UART-4 CTS */
+            J721E_IOPAD(0x104, PIN_OUTPUT, 8) /* P8_32 -> UART-4 RTS */
         >;
     };
 };
@@ -72,7 +72,6 @@
     pinctrl-names = "default";
     pinctrl-0 = <&gpsr_uart_pins>;
     status = "okay";
-	symlink = "bone/uart/1";
 };
 
 &main_uart4 {
@@ -80,5 +79,4 @@
     pinctrl-0 = <&radio_uart_pins>;
     uart-has-rtscts;
     status = "okay";
-	symlink = "bone/uart/4";
 };
