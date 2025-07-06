@@ -25,8 +25,8 @@
     };
     pwm2_pins: pwm2-pinmux {
         pinctrl-single,pins = <
-            J721E_IOPAD(0x178, PIN_OUTPUT, 6) /* P9_22 -> EHRPWM2A */
-            J721E_IOPAD(0x17c, PIN_OUTPUT, 6) /* P9_14 -> EHRPWM2B */
+            J721E_IOPAD(0x178, PIN_OUTPUT, 6) /* P9_14 -> EHRPWM2A */
+            J721E_IOPAD(0x17c, PIN_OUTPUT, 6) /* P9_16 -> EHRPWM2B */
         >;
     };
 
@@ -51,24 +51,28 @@
     pinctrl-names = "default";
     pinctrl-0 = <&pwm0_pins>;
     status = "okay";
+	symlink = "bone/pwm/0";
 };
 
 &main_ehrpwm1 {
     pinctrl-names = "default";
     pinctrl-0 = <&pwm1_pins>;
     status = "okay";
+	symlink = "bone/pwm/1";
 };
 
 &main_ehrpwm2 {
     pinctrl-names = "default";
     pinctrl-0 = <&pwm2_pins>;
     status = "okay";
+	symlink = "bone/pwm/2";
 };
 
 &main_uart1 {
     pinctrl-names = "default";
     pinctrl-0 = <&gpsr_uart_pins>;
     status = "okay";
+	symlink = "bone/uart/1";
 };
 
 &main_uart4 {
@@ -76,4 +80,5 @@
     pinctrl-0 = <&radio_uart_pins>;
     uart-has-rtscts;
     status = "okay";
+	symlink = "bone/uart/4";
 };
